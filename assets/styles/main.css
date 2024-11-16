@@ -7,6 +7,8 @@
 html, body {
     height: 100%;
     overflow: hidden;
+    /* Ensure correct color rendering regardless of color scheme */
+    color-scheme: light dark;
 }
 
 body {
@@ -52,12 +54,21 @@ body {
     justify-content: center;
     margin-bottom: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255, 255, 255, 0.6); /* Subtle white stroke */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    /* Prevent dark mode from affecting the container */
+    forced-color-adjust: none;
+    -webkit-forced-color-adjust: none;
 }
 
 .logo {
     max-width: 90px;
     height: auto;
+    /* Prevent dark mode from affecting the logo */
+    forced-color-adjust: none;
+    -webkit-forced-color-adjust: none;
+    /* Additional protection against color inversion */
+    filter: none !important;
+    -webkit-filter: none !important;
 }
 
 h1 {
@@ -91,6 +102,11 @@ h1 {
 .download-buttons img {
     width: 220px;
     transition: transform 0.3s ease;
+    /* Prevent dark mode from affecting store badges */
+    forced-color-adjust: none;
+    -webkit-forced-color-adjust: none;
+    filter: none !important;
+    -webkit-filter: none !important;
 }
 
 .download-buttons img:hover {
@@ -126,8 +142,18 @@ h1 {
         flex-direction: row;
         justify-content: center;
     }
-
     h1 {
         font-size: 3rem;
+    }
+}
+
+/* Explicitly preserve images in dark mode */
+@media (prefers-color-scheme: dark) {
+    img {
+        /* Prevent any color changes in dark mode */
+        forced-color-adjust: none;
+        -webkit-forced-color-adjust: none;
+        filter: none !important;
+        -webkit-filter: none !important;
     }
 }
